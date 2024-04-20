@@ -2,7 +2,7 @@ import struct
 import os
 import sys
 import textwrap
-from importlib import import_module
+from importlib import import_module, metadata
 import pprint
 import tempfile
 import sqlite3
@@ -23,7 +23,10 @@ except:
     from Crypto.Cipher import AES # https://www.dlitz.net/software/pycrypto/
 
 
-__version__ = '0.9.925'
+try:
+    __version__ = metadata.version("iOSbackup")
+except metadata.PackageNotFoundError:
+    __version__ = "0.0+unknown"
 
 module_logger = logging.getLogger(__name__)
 
